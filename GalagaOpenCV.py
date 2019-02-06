@@ -88,15 +88,12 @@ def draw_keypoints(image, *args):
     return image
 
 def lowest_enemy_location():
-    #global lowest_enemy_y_axis
     lowest_enemy_y_axis = 0
     lowest_enemy_x_axis = 0
-    #lowest_enemy_x = 0
     j = 0
     while j<len(keypoints_enemy):
         enemy_axis_y = keypoints_enemy[j].pt[0]
         enemy_axis_x = keypoints_enemy[j].pt[1]
-        #if enemy_axis_x is not None:
         if enemy_axis_x > lowest_enemy_x:
             lowest_enemy_x_axis = enemy_axis_x
             lowest_enemy_y_axis = enemy_axis_y

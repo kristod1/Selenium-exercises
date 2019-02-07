@@ -90,6 +90,7 @@ def draw_keypoints(image, *args):
 def lowest_enemy_location():
     lowest_enemy_y_axis = 0
     lowest_enemy_x_axis = 0
+    lowest_enemy_x = 0
     j = 0
     while j<len(keypoints_enemy):
         enemy_axis_y = keypoints_enemy[j].pt[0]
@@ -130,25 +131,21 @@ def follow_and_destroy(lowest_enemy_y_axis, lowest_enemy_x_axis):
             pyautogui.keyUp('right')
             pyautogui.keyUp('x')
 
-def game_loop():
-    while True:
-        get_driver_image(driver)
-        prepare_image(image, gray_image)
-        keypoints_player = player_detector.detect(threshold)
-        keypoints_enemy = enemy_detector.detect(threshold)
-        keypoints_missile = missile_detector.detect(threshold)
-        im_with_keypoints = draw_keypoints(
-            image, keypoints_player,
-            keypoints_enemy,
-            keypoints_missile
-        )
-        lowest_enemy_y_axis, lowest_enemy_x_axis = lowest_enemy_location()
-        follow_and_destroy(lowest_enemy_y_axis, lowest_enemy_x_axis)
-        cv2.imshow("Galaga", im_with_keypoints)
-        if cv2.waitKey(1) == ord('q'):
-            break
-
-game_loop()
-
+while True:
+    get_driver_image(driver)
+    prepare_image(image, gray_image)
+    keypoints_player = player_detector.detect(threshold)
+    keypoints_enemy = enemy_detector.detect(threshold)
+    keypoints_missile = missile_detector.detect(threshold)
+    im_with_keypoints = draw_keypoints(
+        image, keypoints_player,
+        keypoints_enemy,
+        keypoints_missile
+    )
+    lowest_enemy_y_axis, lowest_enemy_x_axis = lowest_enemy_location()
+    follow_and_destroy(lowest_enemy_y_axis, lowest_enemy_x_axis)
+    cv2.imshow("Galaga", im_with_keypoints)
+    if cv2.waitKey(1) == ord('q'):
+        break
 cap.release()
 cv2.destroplayer_axis_xllWindows()
